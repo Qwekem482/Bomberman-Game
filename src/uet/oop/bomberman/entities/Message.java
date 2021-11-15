@@ -4,7 +4,7 @@ import uet.oop.bomberman.graphic.Screen;
 
 import java.awt.*;
 
-public class Message extends Entity {
+public class Message extends Underworking_Entity {
     protected String message;
     protected int duration;
     protected Color color;
