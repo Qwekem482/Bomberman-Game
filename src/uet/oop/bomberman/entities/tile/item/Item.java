@@ -4,7 +4,7 @@ import uet.oop.bomberman.entities.tile.Tile;
 import uet.oop.bomberman.graphic.Sprite;
 
 public abstract class Item extends Tile {
-    public Item(int x, int y, Sprite sprite) {
-        super(x, y, sprite);
-    }
+	public Item(int x, int y, Sprite sprite) {
+		super(x, y, sprite);
+	}
 }
