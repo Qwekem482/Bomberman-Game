@@ -1,7 +1,9 @@
 package uet.oop.bomberman;
 
-public class Bomberman {
-    public static void main(String[] args) {
+import uet.oop.bomberman.gui.Frame;
 
+public class bomberman {
+    public static void main(String[] args) {
+        new Frame();
     }
 }

@@ -2,7 +2,7 @@ package uet.oop.bomberman;
 
 import uet.oop.bomberman.graphic.Screen;
 import uet.oop.bomberman.gui.Frame;
-import uet.oop.bomberman.input.Keyboard;
+import uet.oop.bomberman.input.keyBoard;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -33,7 +33,7 @@ public class Game extends Canvas {
 
     protected int _screenDelay = SCREENDELAY;
 
-    private Keyboard input;
+    private keyBoard input;
     private boolean running = false;
     private boolean paused = true;
 
@@ -45,11 +45,11 @@ public class Game extends Canvas {
     private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
 
     public Game(Frame frame) {
-        frame = frame;
+        this.frame = frame;
         frame.setTitle(title);
 
         screen = new Screen(WIDTH, HEIGHT);
-        input = new Keyboard();
+        input = new keyBoard();
 
         board = new Board(this, input, screen);
         addKeyListener(input);
@@ -94,5 +94,51 @@ public class Game extends Canvas {
     private void update() {
         input.update();
         board.update();
+    }
+
+    public void start() {
+        running = true;
+        long  lastTime = System.nanoTime();
+        long timer = System.currentTimeMillis();
+        final double ns = 1000000000.0 / 60.0; //nanosecond, 60 frames per second
+        double delta = 0;
+        int frames = 0;
+        int updates = 0;
+        requestFocus();
+        while(running) {
+            long now = System.nanoTime();
+            delta += (now - lastTime) / ns;
+            lastTime = now;
+            while(delta >= 1) {
+                update();
+                updates++;
+                delta--;
+            }
+
+            if(paused) {
+                if(_screenDelay <= 0) {
+                    board.setShow(-1);
+                    paused = false;
+                }
+
+                renderScreen();
+            } else {
+                renderGame();
+            }
+
+
+            frames++;
+            if(System.currentTimeMillis() - timer > 1000) {
+                frame.setTime(board.subtractTime());
+                frame.setPoints(board.getPoints());
+                timer += 1000;
+                frame.setTitle(title + " | " + updates + " rate, " + frames + " fps");
+                updates = 0;
+                frames = 0;
+
+                if(board.getShow() == 2)
+                    _screenDelay--;
+            }
+        }
     }
 }
