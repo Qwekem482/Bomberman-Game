@@ -1,6 +1,3 @@
-// Under-Working Class
-// Not Complete Yet
-// 6/8 method.
 package uet.oop.bomberman.entities;
 
 import uet.oop.bomberman.graphic.IRender;
@@ -10,20 +7,20 @@ import uet.oop.bomberman.graphic.Sprite;
 /**
  * Abstract class cho các entities
  */
-public abstract class Underworking_Entity implements IRender {
+public abstract class Entity implements IRender {
 
     protected double x;
     protected double y;
     protected boolean removed = false;
     protected Sprite sprite;
 
-    public Underworking_Entity(double x, double y, Sprite sprite) {
+    public Entity(double x, double y, Sprite sprite) {
         this.x = x;
         this.y = y;
         this.sprite = sprite;
     }
 
-    public Underworking_Entity() {
+    public Entity() {
     }
 
     public boolean isRemove() {
@@ -56,19 +53,11 @@ public abstract class Underworking_Entity implements IRender {
     @Override
     public abstract void render(Screen screen);
 
-    /**
-     * Under-Working
-     * @return
-     */
     public int getXTile() {
-        return 0;
+        return Coordinates.pixelToTile(x + sprite.SIZE / 2);
     }
 
-    /**
-     * Under-Working
-     * @return
-     */
     public int getYTile() {
-        return 0;
+        return Coordinates.pixelToTile(y - sprite.SIZE / 2);
     }
 }

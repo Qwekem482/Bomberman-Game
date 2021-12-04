@@ -5,7 +5,7 @@ import uet.oop.bomberman.graphic.Sprite;
 /**
  * Abstract class cho các animated entities
  */
-public abstract class AnimatedEntity extends Underworking_Entity {
+public abstract class AnimatedEntity extends Entity {
     protected int animate = 0;
     protected final int MAX_ANIMATE = 7500;
 

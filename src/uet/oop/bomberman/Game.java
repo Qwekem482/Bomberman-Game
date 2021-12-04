@@ -1,8 +1,8 @@
 package uet.oop.bomberman;
 
-import uet.oop.bomberman.graphics.Screen;
+import uet.oop.bomberman.graphic.Screen;
 import uet.oop.bomberman.gui.Frame;
-import uet.oop.bomberman.input.keyBoard;
+import uet.oop.bomberman.input.Keyboard;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -15,7 +15,7 @@ public class Game extends Canvas {
     public static final int HEIGHT = 13 * TILES_SIZE;
     public static final int LEVELNUMBER = 5;
 
-    public static SCALE = 3;
+    public static int SCALE = 3;
     public static final String title = "BOMBERMAN GAME";
 
     private static final int BOMBRATE = 1;
@@ -33,11 +33,11 @@ public class Game extends Canvas {
 
     protected int _screenDelay = SCREENDELAY;
 
-    private keyBoard input;
+    private Keyboard input;
     private boolean running = false;
     private boolean paused = true;
 
-    private board board;
+    private Board board;
     private Screen screen;
     private Frame frame;
 

@@ -1,14 +1,12 @@
-// Under-Working Class
-// Not Complete Yet
 package uet.oop.bomberman.entities.tile;
 
-import uet.oop.bomberman.entities.Underworking_Entity;
+import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.graphic.Screen;
 import uet.oop.bomberman.graphic.Sprite;
 
-public abstract class Underworking_Tile extends Underworking_Entity {
+public abstract class Tile extends Entity {
 
-    public Underworking_Tile(int x, int y, Sprite sprite) {
+    public Tile(int x, int y, Sprite sprite) {
         super(x, y, sprite);
     }
 
@@ -18,20 +16,14 @@ public abstract class Underworking_Tile extends Underworking_Entity {
      */
     @Override
     public void update() {
-
     }
 
     /**
-     * Under-working
-     */
-    /**
      * Được gọi liên tục.
      * update hình ảnh của entity
-     *
-     * @param screen
      */
     @Override
     public void render(Screen screen) {
-
+        screen.renderEntity(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y), this);
     }
 }

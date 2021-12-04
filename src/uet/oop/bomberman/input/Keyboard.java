@@ -3,7 +3,7 @@ package uet.oop.bomberman.input;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class keyBoard implements KeyListener {
+public class Keyboard implements KeyListener {
     private boolean[] key = new boolean[120];
     public boolean up;
     public boolean down;
