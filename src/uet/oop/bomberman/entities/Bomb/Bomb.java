@@ -19,8 +19,8 @@ public class Bomb extends AnimatedEntity {
     protected boolean exploded = false;
 
     public Bomb(int x, int y, Board board) {
-        _x = x;
-        _y = y;
+        this.x = x;
+        this.y = y;
         this.board = board;
         sprite = Sprite.bomb;
     }
@@ -49,7 +49,7 @@ public class Bomb extends AnimatedEntity {
             sprite =  Sprite.bomb_exploded2;
             renderFlames(screen);
         } else
-            sprite = Sprite.movingSprite(Sprite.bomb, Sprite.bomb_1, Sprite.bomb_2, _animate, 60);
+            sprite = Sprite.movingSprite(Sprite.bomb, Sprite.bomb_1, Sprite.bomb_2, animate, 60);
 
         int xt = (int) x << 4;
         int yt = (int) y << 4;
@@ -90,9 +90,13 @@ public class Bomb extends AnimatedEntity {
         if(!exploded) return null;
 
         for (int i = 0; i < flames.length; i++) {
-            if(flames[i] == null) return null;
+            if(flames[i] == null) {
+                return null;
+            }
             FlameSegment e = flames[i].flameSegmentAt(x, y);
-            if(e != null) return e;
+            if(e != null) {
+                return e;
+            }
         }
         return null;
     }

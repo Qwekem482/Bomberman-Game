@@ -9,36 +9,36 @@ public class FlameSegment extends Entity {
     protected boolean last;
 
     public FlameSegment(int x, int y, int direction, boolean last) {
-        _x = x;
-        _y = y;
-        _last = last;
+        this.x = x;
+        this.y = y;
+        this.last = last;
         switch (direction) {
             case 0:
                 if(!last) {
-                    _sprite = Sprite.explosion_vertical2;
+                    sprite = Sprite.explosion_vertical2;
                 } else {
-                    _sprite = Sprite.explosion_vertical_top_last2;
+                    sprite = Sprite.explosion_vertical_top_last2;
                 }
                 break;
             case 1:
                 if(!last) {
-                    _sprite = Sprite.explosion_horizontal2;
+                    sprite = Sprite.explosion_horizontal2;
                 } else {
-                    _sprite = Sprite.explosion_horizontal_right_last2;
+                    sprite = Sprite.explosion_horizontal_right_last2;
                 }
                 break;
             case 2:
                 if(!last) {
-                    _sprite = Sprite.explosion_vertical2;
+                    sprite = Sprite.explosion_vertical2;
                 } else {
-                    _sprite = Sprite.explosion_vertical_down_last2;
+                    sprite = Sprite.explosion_vertical_down_last2;
                 }
                 break;
             case 3:
                 if(!last) {
-                    _sprite = Sprite.explosion_horizontal2;
+                    sprite = Sprite.explosion_horizontal2;
                 } else {
-                    _sprite = Sprite.explosion_horizontal_left_last2;
+                    sprite = Sprite.explosion_horizontal_left_last2;
                 }
                 break;
         }
@@ -46,8 +46,8 @@ public class FlameSegment extends Entity {
 
     @Override
     public void render(Screen screen) {
-        int xt = Coordinates.tileToPixel(_x);
-        int yt = Coordinates.tileToPixel(_y);
+        int xt = Coordinates.tileToPixel(x);
+        int yt = Coordinates.tileToPixel(y);
         screen.renderEntity(xt, yt , this);
     }
 
