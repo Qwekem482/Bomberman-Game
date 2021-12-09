@@ -1,7 +1,7 @@
 package uet.oop.bomberman.entities.tile.destroyable;
 
 
-import uet.oop.bomberman.graphic.Screen;
+import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphic.Sprite;
 import uet.oop.bomberman.level.Coordinates;
 

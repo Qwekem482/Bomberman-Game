@@ -13,11 +13,11 @@ import uet.oop.bomberman.entities.tile.item.BombItem;
 import uet.oop.bomberman.entities.tile.item.FlameItem;
 import uet.oop.bomberman.entities.tile.item.Item;
 import uet.oop.bomberman.entities.tile.item.SpeedItem;
-import uet.oop.bomberman.graphic.Screen;
 import uet.oop.bomberman.graphic.Sprite;
 import uet.oop.bomberman.input.Keyboard;
 import uet.oop.bomberman.level.Coordinates;
 import uet.oop.bomberman.level.FileLevelLoader;
+import uet.oop.bomberman.graphics.Screen;
 
 import java.util.ArrayList;
 import java.util.Iterator;

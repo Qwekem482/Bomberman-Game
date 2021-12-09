@@ -2,14 +2,14 @@ package uet.oop.bomberman.Entities.Bomb;
 
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
-import uet.oop.bomberman.Entities.Entity;
-import uet.oop.bomberman.Entities.LayeredEntity;
-import uet.oop.bomberman.Entities.tile.Portal;
-import uet.oop.bomberman.Entities.tile.Wall;
-import uet.oop.bomberman.Entities.tile.destroyable.Brick;
-import uet.oop.bomberman.Entities.tile.item.Item;
-import uet.oop.bomberman.graphic.Screen;
+import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.LayeredEntity;
+import uet.oop.bomberman.entities.tile.Portal;
+import uet.oop.bomberman.entities.tile.Wall;
+import uet.oop.bomberman.entities.tile.destroyable.Brick;
+import uet.oop.bomberman.entities.tile.item.Item;
 import uet.oop.bomberman.level.Coordinates;
+import uet.oop.bomberman.graphics.Screen;
 
 public class Flame extends Entity {
     protected Board _board;

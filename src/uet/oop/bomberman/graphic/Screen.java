@@ -13,22 +13,22 @@ import java.util.Arrays;
  * Xử lý render cho tất cả Entity và một số màn hình phụ ra Game Panel
  */
 public class Screen {
-    protected int _width, _height;
-    public int[] _pixels;
-    private int _transparentColor = 0xffff00ff;
+    protected int width, height;
+    public int[] pixels;
+    private int transparentColor = 0xffff00ff;
 
     public static int xOffset = 0, yOffset = 0;
 
     public Screen(int width, int height) {
-        _width = width;
-        _height = height;
+        width = width;
+        height = height;
 
-        _pixels = new int[width * height];
+        pixels = new int[width * height];
 
     }
 
     public void clear() {
-        Arrays.fill(_pixels, 0);
+        Arrays.fill(pixels, 0);
     }
 
     public void renderEntity(int xp, int yp, Entity entity) { //save entity pixels
@@ -38,10 +38,10 @@ public class Screen {
             int ya = y + yp; //add offset
             for (int x = 0; x < entity.getSprite().getSize(); x++) {
                 int xa = x + xp; //add offset
-                if(xa < -entity.getSprite().getSize() || xa >= _width || ya < 0 || ya >= _height) break; //fix black margins
+                if(xa < -entity.getSprite().getSize() || xa >= width || ya < 0 || ya >= height) break; //fix black margins
                 if(xa < 0) xa = 0; //start at 0 from left
                 int color = entity.getSprite().getPixel(x + y * entity.getSprite().getSize());
-                if(color != _transparentColor) _pixels[xa + ya * _width] = color;
+                if(color != transparentColor) pixels[xa + ya * width] = color;
             }
         }
     }
@@ -53,13 +53,13 @@ public class Screen {
             int ya = y + yp;
             for (int x = 0; x < entity.getSprite().getSize(); x++) {
                 int xa = x + xp;
-                if(xa < -entity.getSprite().getSize() || xa >= _width || ya < 0 || ya >= _height) break; //fix black margins
+                if(xa < -entity.getSprite().getSize() || xa >= width || ya < 0 || ya >= height) break; //fix black margins
                 if(xa < 0) xa = 0;
                 int color = entity.getSprite().getPixel(x + y * entity.getSprite().getSize());
-                if(color != _transparentColor)
-                    _pixels[xa + ya * _width] = color;
+                if(color != transparentColor)
+                    pixels[xa + ya * width] = color;
                 else
-                    _pixels[xa + ya * _width] = below.getPixel(x + y * below.getSize());
+                    pixels[xa + ya * width] = below.getPixel(x + y * below.getSize());
             }
         }
     }
@@ -142,18 +142,18 @@ public class Screen {
     }
 
     public int getWidth() {
-        return _width;
+        return width;
     }
 
     public int getHeight() {
-        return _height;
+        return height;
     }
 
     public int getRealWidth() {
-        return _width * Game.SCALE;
+        return width * Game.SCALE;
     }
 
     public int getRealHeight() {
-        return _height * Game.SCALE;
+        return height * Game.SCALE;
     }
 }

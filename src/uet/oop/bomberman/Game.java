@@ -142,7 +142,55 @@ public class Game extends Canvas {
         }
     }
 
+    public static void setBomberSpeed(double bomberSpeed) {
+        Game.bomberSpeed = bomberSpeed;
+    }
+
+    public static double getBomberSpeed() {
+        return bomberSpeed;
+    }
+
+    public static void setBombRate(int bombRate) {
+        Game.bombRate = bombRate;
+    }
+
+    public static int getBombRate() {
+        return bombRate;
+    }
+
+    public static void setBombRadius(int bombRadius) {
+        Game.bombRadius = bombRadius;
+    }
+
+    public static int getBombRadius() {
+        return bombRadius;
+    }
+
+    public static void addBomberSpeed(double i) {
+        bomberSpeed += i;
+    }
+
+    public static void addBombRadius(int i) {
+        bombRadius += i;
+    }
+
+    public static void addBombRate(int i) {
+        bombRate += i;
+    }
+
+    public void resetScreenDelay() {
+        _screenDelay = SCREENDELAY;
+    }
+
     public Board getBoard() {
         return board;
+    }
+
+    public boolean isPaused() {
+        return paused;
+    }
+
+    public void pause() {
+        paused = true;
     }
 }
