@@ -5,18 +5,22 @@ import uet.oop.bomberman.Game;
 import javax.swing.*;
 import java.awt.*;
 
-public class GamePanel extends JFrame {
-    private Game game;
+/**
+ * Swing Panel chứa cảnh game
+ */
+public class GamePanel extends JPanel {
+
+    private Game _game;
 
     public GamePanel(Frame frame) {
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE));
 
-        game = new Game(frame);
+        _game = new Game(frame);
 
-        add(game);
+        add(_game);
 
-        game.setVisible(true);
+        _game.setVisible(true);
 
         setVisible(true);
         setFocusable(true);
@@ -24,6 +28,7 @@ public class GamePanel extends JFrame {
     }
 
     public Game getGame() {
-        return game;
+        return _game;
     }
+
 }

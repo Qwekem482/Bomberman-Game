@@ -5,7 +5,11 @@ import uet.oop.bomberman.Game;
 import javax.swing.*;
 import java.awt.*;
 
-public class InfoPanel extends JFrame {
+/**
+ * Swing Panel hiển thị thông tin thời gian, điểm mà người chơi đạt được
+ */
+public class InfoPanel extends JPanel {
+
     private JLabel timeLabel;
     private JLabel pointsLabel;
 
@@ -34,4 +38,5 @@ public class InfoPanel extends JFrame {
     public void setPoints(int t) {
         pointsLabel.setText("Score: " + t);
     }
+
 }

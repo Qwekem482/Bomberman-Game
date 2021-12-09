@@ -4,6 +4,6 @@ public interface IRender {
 
     void update();
 
-    void render(Screen screen);
+    void render(uet.oop.bomberman.graphics.Screen screen);
 
 }

@@ -1,5 +1,6 @@
 package uet.oop.bomberman;
 
+import uet.oop.bomberman.audio.BackgroundMusic;
 import uet.oop.bomberman.audio.backgroundMusic;
 import uet.oop.bomberman.audio.Sound;
 import uet.oop.bomberman.Entities.Entity;
@@ -11,11 +12,11 @@ import uet.oop.bomberman.Entities.character.Character;
 import uet.oop.bomberman.Entities.character.enemy.Enemy;
 import uet.oop.bomberman.exceptions.LoadLevelException;
 import uet.oop.bomberman.graphic.IRender;
-import uet.oop.bomberman.graphic.Screen;
 import uet.oop.bomberman.input.keyBoard;
 import uet.oop.bomberman.level.Coordinates;
 import uet.oop.bomberman.level.FileLevelLoader;
 import uet.oop.bomberman.level.LevelLoader;
+import uet.oop.bomberman.graphics.Screen;
 
 import java.awt.*;
 import java.util.ArrayList;
