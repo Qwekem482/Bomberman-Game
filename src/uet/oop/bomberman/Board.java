@@ -3,13 +3,14 @@ package uet.oop.bomberman;
 import uet.oop.bomberman.audio.BackgroundMusic;
 import uet.oop.bomberman.audio.backgroundMusic;
 import uet.oop.bomberman.audio.Sound;
-import uet.oop.bomberman.Entities.Entity;
-import uet.oop.bomberman.Entities.Message;
+import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.Message;
 import uet.oop.bomberman.Entities.Bomb.Bomb;
 import uet.oop.bomberman.Entities.Bomb.FlameSegment;
-import uet.oop.bomberman.Entities.character.Bomber;
-import uet.oop.bomberman.Entities.character.Character;
-import uet.oop.bomberman.Entities.character.enemy.Enemy;
+import uet.oop.bomberman.entities.character.Bomber;
+import uet.oop.bomberman.entities.character.Character;
+import uet.oop.bomberman.entities.character.enemy.Enemy;
+import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.exceptions.LoadLevelException;
 import uet.oop.bomberman.graphic.IRender;
 import uet.oop.bomberman.input.keyBoard;
@@ -226,10 +227,10 @@ public class Board {
         return null;
     }
 
-    public java.lang.Character getCharacterAtExcluding(int x, int y, java.lang.Character a) {
-        Iterator<java.lang.Character> itr = _characters.iterator();
+    public Character getCharacterAtExcluding(int x, int y, Character a) {
+        Iterator<Character> itr = _characters.iterator();
 
-        java.lang.Character cur;
+        Character cur;
         while(itr.hasNext()) {
             cur = itr.next();
             if(cur == a) {

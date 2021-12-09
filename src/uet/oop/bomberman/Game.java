@@ -141,4 +141,8 @@ public class Game extends Canvas {
             }
         }
     }
+
+    public Board getBoard() {
+        return board;
+    }
 }
