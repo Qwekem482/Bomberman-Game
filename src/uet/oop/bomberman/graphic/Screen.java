@@ -1,4 +1,4 @@
-package uet.oop.bomberman.graphics;
+package uet.oop.bomberman.graphic;
 
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class Screen {
     protected int width, height;
     public int[] pixels;
-    private int transparentColor = 0xffff00ff;
+    private final int transparentColor = 0xffff00ff;
 
     public static int xOffset = 0, yOffset = 0;
 

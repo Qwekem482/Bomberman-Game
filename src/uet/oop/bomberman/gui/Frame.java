@@ -5,23 +5,21 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Frame extends JFrame {
-    public GamePanel _gamepane;
-    private JPanel _containerpane;
-    private InfoPanel _infopanel;
+    public GamePanel gamepane;
+    private final InfoPanel infoPanel;
 
-    private Game game;
     public Frame() {
 
-        _containerpane = new JPanel(new BorderLayout());
-        _gamepane = new GamePanel(this);
-        _infopanel = new InfoPanel(_gamepane.getGame());
+        JPanel containerpane = new JPanel(new BorderLayout());
+        gamepane = new GamePanel(this);
+        infoPanel = new InfoPanel(gamepane.getGame());
 
-        _containerpane.add(_infopanel, BorderLayout.PAGE_START);
-        _containerpane.add(_gamepane, BorderLayout.PAGE_END);
+        containerpane.add(infoPanel, BorderLayout.PAGE_START);
+        containerpane.add(gamepane, BorderLayout.PAGE_END);
 
-        game = _gamepane.getGame();
+        Game game = gamepane.getGame();
 
-        add(_containerpane);
+        add(containerpane);
 
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,10 +31,10 @@ public class Frame extends JFrame {
     }
 
     public void setTime(int time) {
-        _infopanel.setTime(time);
+        infoPanel.setTime(time);
     }
 
     public void setPoints(int points) {
-        _infopanel.setPoints(points);
+        infoPanel.setPoints(points);
     }
 }
