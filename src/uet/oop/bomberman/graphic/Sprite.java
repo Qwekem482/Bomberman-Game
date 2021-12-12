@@ -3,11 +3,11 @@ package uet.oop.bomberman.graphic;
 public class Sprite {
 
     public final int SIZE;
-    private int _x, _y;
-    public int[] _pixels;
-    protected int _realWidth;
-    protected int _realHeight;
-    private SpriteSheet _sheet;
+    private int x, y;
+    public int[] pixels;
+    protected int realWidth;
+    protected int realHeight;
+    private SpriteSheet sheet;
 
     /*
 |--------------------------------------------------------------------------
@@ -176,25 +176,25 @@ public class Sprite {
 
     public Sprite(int size, int x, int y, SpriteSheet sheet, int rw, int rh) {
         SIZE = size;
-        _pixels = new int[SIZE * SIZE];
-        _x = x * SIZE;
-        _y = y * SIZE;
-        _sheet = sheet;
-        _realWidth = rw;
-        _realHeight = rh;
+        pixels = new int[SIZE * SIZE];
+        this.x = x * SIZE;
+        this.y = y * SIZE;
+        this.sheet = sheet;
+        realWidth = rw;
+        realHeight = rh;
 
     }
 
     // Set color for the sprite.
     public Sprite(int size, int color) {
         SIZE = size;
-        _pixels = new int[SIZE * SIZE];
+        pixels = new int[SIZE * SIZE];
         setColor(color);
     }
 
     private void setColor(int color) {
-        for (int i = 0; i < _pixels.length; i++) {
-            _pixels[i] = color;
+        for (int i = 0; i < pixels.length; i++) {
+            pixels[i] = color;
         }
     }
 
@@ -223,7 +223,7 @@ public class Sprite {
     private void load() {
         for (int y = 0; y < SIZE; y++) {
             for (int x = 0; x < SIZE; x++) {
-                _pixels[x + y * SIZE] = _sheet._pixels[(x + _x) + (y + _y) * _sheet.SIZE];
+                pixels[x + y * SIZE] = sheet._pixels[(x + this.x) + (y + this.y) * sheet.SIZE];
             }
         }
     }
@@ -233,6 +233,6 @@ public class Sprite {
     }
 
     public int getPixel(int i) {
-        return _pixels[i];
+        return pixels[i];
     }
 }

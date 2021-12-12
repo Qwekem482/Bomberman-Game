@@ -266,7 +266,7 @@ public class Board {
         entities[pos] = e;
     }
 
-    public void addCharacter(java.lang.Character e) {
+    public void addCharacter(Character e) {
         characters.add(e);
     }
 
