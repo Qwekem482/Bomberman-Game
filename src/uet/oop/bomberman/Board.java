@@ -30,7 +30,7 @@ public class Board {
     public Entity[] entities;
     public List<Character> characters = new ArrayList<>();
     protected List<Bomb> bombs = new ArrayList<>();
-    private List<Message> messages = new ArrayList<>();
+    private final List<Message> messages = new ArrayList<>();
 
     private int screenToShow = -1; //1:endgame, 2:changelevel, 3:paused, 4:victory
 
@@ -168,7 +168,7 @@ public class Board {
 
     public Entity getEntity(double x, double y, Character m) {
 
-        Entity res = null;
+        Entity res;
 
         res = getFlameSegmentAt((int)x, (int)y);
         if( res != null) return res;

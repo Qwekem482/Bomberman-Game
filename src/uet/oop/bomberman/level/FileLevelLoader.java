@@ -2,6 +2,7 @@ package uet.oop.bomberman.level;
 
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
+import uet.oop.bomberman.entities.AnimatedEntitiy;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.LayeredEntity;
 import uet.oop.bomberman.entities.character.Bomber;
@@ -20,7 +21,6 @@ import uet.oop.bomberman.graphic.Sprite;
 
 import java.io.File;
 import java.util.Scanner;
-
 
 public class FileLevelLoader extends LevelLoader {
 
@@ -79,8 +79,7 @@ public class FileLevelLoader extends LevelLoader {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 pos = x + y * width;
-<<<<<<< HEAD
-                switch (map[y][x]) {
+                switch (_map[y][x]) {
                     case '#' -> _board.addEntity(pos,
                             new Wall(x, y, Sprite.wall)
                     );
@@ -97,31 +96,6 @@ public class FileLevelLoader extends LevelLoader {
                             )
                     );
                     case 'p' -> {
-=======
-                switch (_map[y][x]) {
-                    case '#':
-                        _board.addEntity(pos,
-                                new Wall(x, y, Sprite.wall)
-                        );
-                        break;
-                    case '*':
-                        _board.addEntity(pos,
-                                new LayeredEntity(x, y,
-                                        new Grass(x, y, Sprite.grass),
-                                        new Brick(x, y, Sprite.brick)
-                                )
-                        );
-                        break;
-                    case 'x':
-                        _board.addEntity(pos,
-                                new LayeredEntity(x, y,
-                                        new Portal(x, y, Sprite.portal),
-                                        new Brick(x, y, Sprite.brick)
-                                )
-                        );
-                        break;
-                    case 'p':
->>>>>>> parent of db5d07b (finally)
                         _board.addCharacter(new Bomber(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board));
                         Screen.setOffset(0, 0);
                         _board.addEntity(pos,
@@ -188,4 +162,3 @@ public class FileLevelLoader extends LevelLoader {
     }
 
 }
-
