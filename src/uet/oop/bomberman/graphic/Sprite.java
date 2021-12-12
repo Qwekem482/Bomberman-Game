@@ -1,5 +1,10 @@
 package uet.oop.bomberman.graphic;
 
+import java.util.Arrays;
+
+/**
+ * Lưu trữ thông tin các pixel của 1 sprite (hình ảnh game)
+ */
 public class Sprite {
 
     public final int SIZE;
@@ -10,10 +15,10 @@ public class Sprite {
     private SpriteSheet sheet;
 
     /*
-|--------------------------------------------------------------------------
-| Board sprites
-|--------------------------------------------------------------------------
- */
+    |--------------------------------------------------------------------------
+    | Board sprites
+    |--------------------------------------------------------------------------
+     */
     public static Sprite grass = new Sprite(16, 6, 0, SpriteSheet.tiles, 16, 16);
     public static Sprite brick = new Sprite(16, 7, 0, SpriteSheet.tiles, 16, 16);
     public static Sprite wall = new Sprite(16, 5, 0, SpriteSheet.tiles, 16, 16);
@@ -36,7 +41,7 @@ public class Sprite {
     public static Sprite player_down_2 = new Sprite(16, 2, 2, SpriteSheet.tiles, 12, 16);
 
     public static Sprite player_left_1 = new Sprite(16, 3, 1, SpriteSheet.tiles, 11, 16);
-    public static Sprite player_left_2 = new Sprite(16, 3, 2, SpriteSheet.tiles, 12, 16);
+    public static Sprite player_left_2 = new Sprite(16, 3, 2, SpriteSheet.tiles, 12 ,16);
 
     public static Sprite player_right_1 = new Sprite(16, 1, 1, SpriteSheet.tiles, 11, 16);
     public static Sprite player_right_2 = new Sprite(16, 1, 2, SpriteSheet.tiles, 12, 16);
@@ -182,10 +187,9 @@ public class Sprite {
         this.sheet = sheet;
         realWidth = rw;
         realHeight = rh;
-
+        load();
     }
 
-    // Set color for the sprite.
     public Sprite(int size, int color) {
         SIZE = size;
         pixels = new int[SIZE * SIZE];
@@ -193,39 +197,36 @@ public class Sprite {
     }
 
     private void setColor(int color) {
-        for (int i = 0; i < pixels.length; i++) {
-            pixels[i] = color;
-        }
+        Arrays.fill(pixels, color);
     }
 
-    // moving of the sprite.
-    public static Sprite movingSprite(Sprite x1, Sprite x2, int animate, int time) {
-        int diff = time / 2;
-        return (animate % time > diff) ? x1 : x2;
+    private void load() {
+        for (int y = 0; y < SIZE; y++) {
+            for (int x = 0; x < SIZE; x++) {
+                pixels[x + y * SIZE] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.SIZE];
+            }
+        }
     }
 
     public static Sprite movingSprite(Sprite normal, Sprite x1, Sprite x2, int animate, int time) {
         int calc = animate % time;
         int diff = time / 3;
 
-        if (calc < diff) {
+        if(calc < diff) {
             return normal;
         }
 
-        if (calc < diff * 2) {
+        if(calc < diff * 2) {
             return x1;
         }
 
         return x2;
     }
 
-    // load the pixels sprite
-    private void load() {
-        for (int y = 0; y < SIZE; y++) {
-            for (int x = 0; x < SIZE; x++) {
-                pixels[x + y * SIZE] = sheet._pixels[(x + this.x) + (y + this.y) * sheet.SIZE];
-            }
-        }
+    public static Sprite movingSprite(Sprite x1, Sprite x2, int animate, int time) {
+        int diff = time / 2;
+        return (animate % time > diff) ? x1 : x2;
+
     }
 
     public int getSize() {
@@ -235,4 +236,5 @@ public class Sprite {
     public int getPixel(int i) {
         return pixels[i];
     }
+
 }

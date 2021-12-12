@@ -13,14 +13,14 @@ import java.net.URL;
  */
 
 public class SpriteSheet {
-    public String _path;
+    public String path;
     public final int SIZE;
-    public int[] _pixels;
+    public int[] pixels;
 
     public SpriteSheet(String path, int size) {
-        this._path = path;
+        this.path = path;
         this.SIZE = size;
-        _pixels = new int[size * size];
+        pixels = new int[size * size];
         load();
     }
 
@@ -28,11 +28,11 @@ public class SpriteSheet {
 
     private void load() {
         try {
-            URL a = SpriteSheet.class.getResource(_path);
+            URL a = SpriteSheet.class.getResource(path);
             BufferedImage image = ImageIO.read(a);
             int w = image.getWidth();
             int h = image.getHeight();
-            image.getRGB(0, 0, w, h, _pixels, 0, w);
+            image.getRGB(0, 0, w, h, pixels, 0, w);
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(0);

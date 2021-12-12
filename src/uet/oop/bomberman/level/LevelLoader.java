@@ -9,11 +9,11 @@ import uet.oop.bomberman.exceptions.LoadLevelException;
 public abstract class LevelLoader {
 
     protected int width = 31, height = 13; // default values just for testing
-    protected int level;
-    protected Board board;
+    protected int _level;
+    protected Board _board;
 
     public LevelLoader(Board board, int level) throws LoadLevelException {
-        this.board = board;
+        _board = board;
         loadLevel(level);
     }
 
@@ -30,7 +30,7 @@ public abstract class LevelLoader {
     }
 
     public int getLevel() {
-        return level;
+        return _level;
     }
 
 }

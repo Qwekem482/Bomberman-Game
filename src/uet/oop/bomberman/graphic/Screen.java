@@ -4,7 +4,6 @@ import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.Bomber;
-import uet.oop.bomberman.graphic.Sprite;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -15,15 +14,15 @@ import java.util.Arrays;
 public class Screen {
     protected int width, height;
     public int[] pixels;
-    private final int transparentColor = 0xffff00ff;
+    private int transparentColor = 0xffff00ff;
 
     public static int xOffset = 0, yOffset = 0;
 
-    public Screen(int width, int height) {
-        width = width;
-        height = height;
+    public Screen(int _width, int _height) {
+        width = _width;
+        height = _height;
 
-        pixels = new int[width * height];
+        pixels = new int[_width * _height];
 
     }
 
