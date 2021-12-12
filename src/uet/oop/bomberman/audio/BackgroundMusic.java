@@ -11,21 +11,21 @@ import java.io.File;
  */
 public class BackgroundMusic {
 
-    private static Clip _clip;
-    private static boolean _playing = false;
+    private static Clip clip;
+    private static boolean playing = false;
 
     public static void playMusic()
     {
-        if (_playing) return;
+        if (playing) return;
         try {
-            _playing = true;
+            playing = true;
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("res/audios/BackgroundMusic.wav"));
-            _clip = AudioSystem.getClip();
-            _clip.open(audioInputStream);
-            FloatControl volume = (FloatControl) _clip.getControl(FloatControl.Type.MASTER_GAIN);
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             float range = volume.getMaximum() - volume.getMinimum();
             volume.setValue((range * 0.9f) + volume.getMinimum());
-            _clip.start();
+            clip.start();
 
         }
         catch (Exception exception)
@@ -36,10 +36,10 @@ public class BackgroundMusic {
 
     public static void stopMusic()
     {
-        if (_playing)
+        if (playing)
         {
-            _playing = false;
-            _clip.stop();
+            playing = false;
+            clip.stop();
         }
     }
 

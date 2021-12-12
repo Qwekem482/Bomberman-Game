@@ -1,23 +1,20 @@
 package uet.oop.bomberman;
 
 import uet.oop.bomberman.audio.BackgroundMusic;
-import uet.oop.bomberman.audio.backgroundMusic;
 import uet.oop.bomberman.audio.Sound;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.Message;
-import uet.oop.bomberman.Entities.Bomb.Bomb;
-import uet.oop.bomberman.Entities.Bomb.FlameSegment;
+import uet.oop.bomberman.entities.bomb.Bomb;
+import uet.oop.bomberman.entities.bomb.FlameSegment;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.character.Character;
 import uet.oop.bomberman.entities.character.enemy.Enemy;
-import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.exceptions.LoadLevelException;
-import uet.oop.bomberman.graphic.IRender;
-import uet.oop.bomberman.input.keyBoard;
+import uet.oop.bomberman.input.Keyboard;
 import uet.oop.bomberman.level.Coordinates;
 import uet.oop.bomberman.level.FileLevelLoader;
 import uet.oop.bomberman.level.LevelLoader;
-import uet.oop.bomberman.graphics.Screen;
+import uet.oop.bomberman.graphic.Screen;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -25,37 +22,36 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Board {
-    protected LevelLoader _levelLoader;
-    protected Game _game;
-    protected keyBoard _input;
-    protected Screen _screen;
+    protected LevelLoader levelLoader;
+    protected Game game;
+    protected Keyboard _input;
+    protected Screen screen;
 
-    public Entity[] _entities;
-    public List<Character> _characters = new ArrayList<>();
-    protected List<Bomb> _bombs = new ArrayList<>();
-    private List<Message> _messages = new ArrayList<>();
+    public Entity[] entities;
+    public List<Character> characters = new ArrayList<>();
+    protected List<Bomb> bombs = new ArrayList<>();
+    private List<Message> messages = new ArrayList<>();
 
-    private int _screenToShow = -1; //1:endgame, 2:changelevel, 3:paused, 4:victory
+    private int screenToShow = -1; //1:endgame, 2:changelevel, 3:paused, 4:victory
 
-    private int _time = Game.TIME;
-    private int _points = Game.POINTS;
-    private int _live = 5;
+    private int time = Game.TIME;
+    private int points = Game.POINTS;
+    private int live = 5;
 
-    private int _previousPoints;
-    private double _previousBomberSpeed;
-    private int _previousBombRate;
-    private int _previousBombRadius;
+    private int previousPoints;
+    private double previousBomberSpeed;
+    private int previousBombRate;
+    private int previousBombRadius;
 
-    public Board(Game game, keyBoard input, Screen screen) {
-        _game = game;
+    public Board(Game game, Keyboard input, Screen screen) {
+        this.game = game;
         _input = input;
-        _screen = screen;
+        this.screen = screen;
         loadLevel(1); //start in level 1
     }
 
-    @Override
     public void update() {
-        if( _game.isPaused() ) return;
+        if( game.isPaused() ) return;
         BackgroundMusic.playMusic();
         updateEntities();
         updateCharacters();
@@ -63,15 +59,14 @@ public class Board {
         updateMessages();
         detectEndGame();
 
-        for (int i = 0; i < _characters.size(); i++) {
-            java.lang.Character a = _characters.get(i);
-            if(a.isRemoved()) _characters.remove(i);
+        for (int i = 0; i < characters.size(); i++) {
+            Character a = characters.get(i);
+            if(a.isRemoved()) characters.remove(i);
         }
     }
 
-    @Override
     public void render(Screen screen) {
-        if( _game.isPaused() ) return;
+        if( game.isPaused() ) return;
 
         //only render the visible part of screen
         int x0 = Screen.xOffset >> 4; //tile precision, -> left X
@@ -81,7 +76,7 @@ public class Board {
 
         for (int y = y0; y < y1; y++) {
             for (int x = x0; x < x1; x++) {
-                _entities[x + y * _levelLoader.getWidth()].render(screen);
+                entities[x + y * levelLoader.getWidth()].render(screen);
             }
         }
 
@@ -90,96 +85,96 @@ public class Board {
 
     }
 
-    public int get_live() { return this._live; }
+    public int getlive() { return this.live; }
 
-    public void add_live(int i) { _live += i; }
+    public void addlive(int i) { live += i; }
 
     public void restartLevel() {
         BackgroundMusic.stopMusic();
-        _points = _previousPoints;
-        Game.setBomberSpeed(_previousBomberSpeed);
-        Game.setBombRate(_previousBombRate);
-        Game.setBombRadius(_previousBombRadius);
-        loadLevel((_levelLoader.getLevel()));
+        points = previousPoints;
+        Game.setBomberSpeed(previousBomberSpeed);
+        Game.setBombRate(previousBombRate);
+        Game.setBombRadius(previousBombRadius);
+        loadLevel((levelLoader.getLevel()));
     }
 
     public void nextLevel() {
-        if (_levelLoader.getLevel() < Game.LEVELNUMBER)
+        if (levelLoader.getLevel() < Game.LEVELNUMBER)
         {
             BackgroundMusic.stopMusic();
-            loadLevel(_levelLoader.getLevel() + 1);
+            loadLevel(levelLoader.getLevel() + 1);
         }
         else
         {
-            _screenToShow = 4;
+            screenToShow = 4;
             BackgroundMusic.stopMusic();
             Sound.makeSound("Victory");
-            _game.resetScreenDelay();
-            _game.pause();
+            game.resetScreenDelay();
+            game.pause();
         }
     }
 
     public void loadLevel(int level) {
-        _time = Game.TIME;
-        _screenToShow = 2;
-        _game.resetScreenDelay();
-        _game.pause();
-        _characters.clear();
-        _bombs.clear();
-        _messages.clear();
+        time = Game.TIME;
+        screenToShow = 2;
+        game.resetScreenDelay();
+        game.pause();
+        characters.clear();
+        bombs.clear();
+        messages.clear();
         Enemy.setNumberOfEnemy(0);
-        _previousPoints = _points;
-        _previousBomberSpeed = Game.getBomberSpeed();
-        _previousBombRate = Game.getBombRadius();
-        _previousBombRadius = Game.getBombRadius();
+        previousPoints = points;
+        previousBomberSpeed = Game.getBomberSpeed();
+        previousBombRate = Game.getBombRadius();
+        previousBombRadius = Game.getBombRadius();
 
         try {
-            _levelLoader = new FileLevelLoader(this, level);
-            _entities = new Entity[_levelLoader.getHeight() * _levelLoader.getWidth()];
+            levelLoader = new FileLevelLoader(this, level);
+            entities = new Entity[levelLoader.getHeight() * levelLoader.getWidth()];
 
-            _levelLoader.createEntities();
+            levelLoader.createEntities();
         } catch (LoadLevelException e) {
             endGame();
         }
     }
 
     protected void detectEndGame() {
-        if(_time < 0)
+        if(time < 0)
         {
             Sound.makeSound("OutOfTime");
-            add_live(-1);
-            if (_live == 0) endGame();
+            addlive(-1);
+            if (live == 0) endGame();
             else restartLevel();
         }
     }
 
     public void endGame() {
-        _screenToShow = 1;
+        screenToShow = 1;
         BackgroundMusic.stopMusic();
         Sound.makeSound("GameOver");
-        _game.resetScreenDelay();
-        _game.pause();
+        game.resetScreenDelay();
+        game.pause();
     }
 
 
     public void drawScreen(Graphics g) {
-        switch (_screenToShow) {
+        switch (screenToShow) {
             case 1:
-                _screen.drawEndGame(g, _points);
+                screen.drawEndGame(g, points);
                 break;
             case 2:
-                _screen.drawChangeLevel(g, _levelLoader.getLevel());
+                screen.drawChangeLevel(g, levelLoader.getLevel());
                 break;
             case 3:
-                _screen.drawPaused(g);
+                screen.drawPaused(g);
                 break;
             case 4:
-                _screen.drawVictory(g, _points);
+                screen.drawVictory(g, points);
                 break;
         }
     }
 
-    public Entity getEntity(double x, double y, java.lang.Character m) {
+    public Entity getEntity(double x, double y, Character m) {
 
         Entity res = null;
 
@@ -198,11 +193,11 @@ public class Board {
     }
 
     public List<Bomb> getBombs() {
-        return _bombs;
+        return bombs;
     }
 
     public Bomb getBombAt(double x, double y) {
-        Iterator<Bomb> bs = _bombs.iterator();
+        Iterator<Bomb> bs = bombs.iterator();
         Bomb b;
         while(bs.hasNext()) {
             b = bs.next();
@@ -214,9 +209,9 @@ public class Board {
     }
 
     public Bomber getBomber() {
-        Iterator<java.lang.Character> itr = _characters.iterator();
+        Iterator<Character> itr = characters.iterator();
 
-        java.lang.Character cur;
+        Character cur;
         while(itr.hasNext()) {
             cur = itr.next();
 
@@ -228,7 +223,7 @@ public class Board {
     }
 
     public Character getCharacterAtExcluding(int x, int y, Character a) {
-        Iterator<Character> itr = _characters.iterator();
+        Iterator<Character> itr = characters.iterator();
 
         Character cur;
         while(itr.hasNext()) {
@@ -247,7 +242,7 @@ public class Board {
     }
 
     public FlameSegment getFlameSegmentAt(int x, int y) {
-        Iterator<Bomb> bs = _bombs.iterator();
+        Iterator<Bomb> bs = bombs.iterator();
         Bomb b;
         while(bs.hasNext()) {
             b = bs.next();
@@ -264,34 +259,34 @@ public class Board {
     public Entity getEntityAt(double x, double y) {
         int xc = Coordinates.pixelToTile(x);
         int yc = Coordinates.pixelToTile(y);
-        return _entities[xc + yc * _levelLoader.getWidth()];
+        return entities[xc + yc * levelLoader.getWidth()];
     }
 
     public void addEntity(int pos, Entity e) {
-        _entities[pos] = e;
+        entities[pos] = e;
     }
 
     public void addCharacter(java.lang.Character e) {
-        _characters.add(e);
+        characters.add(e);
     }
 
     public void addBomb(Bomb e) {
-        _bombs.add(e);
+        bombs.add(e);
     }
 
     public void addMessage(Message e) {
-        _messages.add(e);
+        messages.add(e);
     }
 
     protected void renderCharacter(Screen screen) {
-        Iterator<java.lang.Character> itr = _characters.iterator();
+        Iterator<Character> itr = characters.iterator();
 
         while(itr.hasNext())
             itr.next().render(screen);
     }
 
     protected void renderBombs(Screen screen) {
-        Iterator<Bomb> itr = _bombs.iterator();
+        Iterator<Bomb> itr = bombs.iterator();
 
         while(itr.hasNext())
             itr.next().render(screen);
@@ -299,8 +294,8 @@ public class Board {
 
     public void renderMessages(Graphics g) {
         Message m;
-        for (int i = 0; i < _messages.size(); i++) {
-            m = _messages.get(i);
+        for (int i = 0; i < messages.size(); i++) {
+            m = messages.get(i);
 
             g.setFont(new Font("Arial", Font.PLAIN, m.getSize()));
             g.setColor(m.getColor());
@@ -309,87 +304,88 @@ public class Board {
     }
 
     protected void updateEntities() {
-        if( _game.isPaused() ) return;
-        for (int i = 0; i < _entities.length; i++) {
-            _entities[i].update();
+        if( game.isPaused() ) return;
+        for (int i = 0; i < entities.length; i++) {
+            entities[i].update();
         }
     }
 
     protected void updateCharacters() {
-        if( _game.isPaused() ) return;
-        Iterator<java.lang.Character> itr = _characters.iterator();
+        if( game.isPaused() ) return;
+        Iterator<Character> itr = characters.iterator();
 
-        while(itr.hasNext() && !_game.isPaused())
+        while(itr.hasNext() && !game.isPaused())
             itr.next().update();
     }
 
     protected void updateBombs() {
-        if( _game.isPaused() ) return;
-        Iterator<Bomb> itr = _bombs.iterator();
+        if( game.isPaused() ) return;
+        Iterator<Bomb> itr = bombs.iterator();
 
         while(itr.hasNext())
             itr.next().update();
     }
 
     protected void updateMessages() {
-        if( _game.isPaused() ) return;
+        if( game.isPaused() ) return;
         Message m;
         int left;
-        for (int i = 0; i < _messages.size(); i++) {
-            m = _messages.get(i);
+        for (int i = 0; i < messages.size(); i++) {
+            m = messages.get(i);
             left = m.getDuration();
 
             if(left > 0)
                 m.setDuration(--left);
             else
-                _messages.remove(i);
+                messages.remove(i);
         }
     }
 
     public int subtractTime() {
-        if(_game.isPaused())
-            return this._time;
+        if(game.isPaused())
+            return this.time;
         else
-            return this._time--;
+            return this.time--;
     }
 
-    public keyBoard getInput() {
+    public Keyboard getInput() {
         return _input;
     }
 
     public LevelLoader getLevel() {
-        return _levelLoader;
+        return levelLoader;
     }
 
     public Game getGame() {
-        return _game;
+        return game;
     }
 
     public int getShow() {
-        return _screenToShow;
+        return screenToShow;
     }
 
     public void setShow(int i) {
-        _screenToShow = i;
+        screenToShow = i;
     }
 
     public int getTime() {
-        return _time;
+        return time;
     }
 
     public int getPoints() {
-        return _points;
+        return points;
     }
 
     public void addPoints(int points) {
-        this._points += points;
+        this.points += points;
     }
 
     public int getWidth() {
-        return _levelLoader.getWidth();
+        return levelLoader.getWidth();
     }
 
     public int getHeight() {
-        return _levelLoader.getHeight();
+        return levelLoader.getHeight();
     }
+
 }

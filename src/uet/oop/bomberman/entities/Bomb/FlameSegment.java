@@ -1,6 +1,6 @@
-package uet.oop.bomberman.Entities.Bomb;
+package uet.oop.bomberman.entities.bomb;
 
-import uet.oop.bomberman.Entities.Entity;
+import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.graphic.Screen;
 import uet.oop.bomberman.graphic.Sprite;
 import uet.oop.bomberman.level.Coordinates;

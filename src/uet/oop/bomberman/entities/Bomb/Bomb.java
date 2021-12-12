@@ -1,16 +1,18 @@
-package uet.oop.bomberman.Entities.Bomb;
+package uet.oop.bomberman.entities.bomb;
 
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
 import uet.oop.bomberman.audio.Sound;
-import uet.oop.bomberman.Entities.AnimatedEntity;
-import uet.oop.bomberman.Entities.character.Character;
+import uet.oop.bomberman.Entities.Bomb.Flame;
+import uet.oop.bomberman.Entities.Bomb.FlameSegment;
+import uet.oop.bomberman.entities.AnimatedEntitiy;
+import uet.oop.bomberman.entities.character.Character;
 import uet.oop.bomberman.graphic.Screen;
 import uet.oop.bomberman.graphic.Sprite;
 
 import java.util.Iterator;
 
-public class Bomb extends AnimatedEntity {
+public class Bomb extends AnimatedEntitiy {
     protected double timeToExplode = 120; //2 seconds
     public int timeAfter = 10;
 
@@ -74,7 +76,7 @@ public class Bomb extends AnimatedEntity {
     protected void explode() {
         exploded = true;
 
-        Iterator<Character> itr = board._characters.iterator();
+        Iterator<Character> itr = board.characters.iterator();
         Character cur;
         while(itr.hasNext()) {
             cur = itr.next();

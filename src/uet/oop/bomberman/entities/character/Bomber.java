@@ -5,8 +5,7 @@ import uet.oop.bomberman.Game;
 import uet.oop.bomberman.audio.Sound;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.LayeredEntity;
-import uet.oop.bomberman.entities.bomb.Bomb;
-import uet.oop.bomberman.entities.bomb.FlameSegment;
+import uet.oop.bomberman.entities.bomb.*;
 import uet.oop.bomberman.entities.character.enemy.Enemy;
 import uet.oop.bomberman.entities.tile.Portal;
 import uet.oop.bomberman.entities.tile.item.BombItem;
@@ -17,7 +16,7 @@ import uet.oop.bomberman.graphic.Sprite;
 import uet.oop.bomberman.input.Keyboard;
 import uet.oop.bomberman.level.Coordinates;
 import uet.oop.bomberman.level.FileLevelLoader;
-import uet.oop.bomberman.graphics.Screen;
+import uet.oop.bomberman.graphic.Screen;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -148,14 +147,14 @@ public class Bomber extends Character {
         if (!live) return;
         Sound.makeSound("BomberDies");
         live = false;
-        board.addLive(-1);
+        board.addlive(-1);
     }
 
     @Override
     protected void afterKill() {
         if (timeAfter > 0) --timeAfter;
         else {
-            if (board.getLive() < 1) board.endGame();
+            if (board.getlive() < 1) board.endGame();
             else board.restartLevel();
         }
     }

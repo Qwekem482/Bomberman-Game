@@ -4,7 +4,7 @@ package uet.oop.bomberman.entities.character.enemy;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.entities.bomb.Bomb;
 import uet.oop.bomberman.entities.character.enemy.ai.AIMedium;
-import uet.oop.bomberman.graphics.Sprite;
+import uet.oop.bomberman.graphic.Sprite;
 import uet.oop.bomberman.level.Coordinates;
 import uet.oop.bomberman.level.FileLevelLoader;
 

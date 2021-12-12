@@ -1,5 +1,6 @@
 package uet.oop.bomberman.entities;
 
+
 public abstract class AnimatedEntitiy extends Entity {
 
 	protected int animate = 0;

@@ -9,7 +9,8 @@ import uet.oop.bomberman.entities.tile.Wall;
 import uet.oop.bomberman.entities.tile.destroyable.Brick;
 import uet.oop.bomberman.entities.tile.item.Item;
 import uet.oop.bomberman.level.Coordinates;
-import uet.oop.bomberman.graphics.Screen;
+import uet.oop.bomberman.graphic.Screen;
+import uet.oop.bomberman.entities.bomb.FlameSegment;
 
 public class Flame extends Entity {
     protected Board _board;

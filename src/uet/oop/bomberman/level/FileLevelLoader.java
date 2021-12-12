@@ -15,7 +15,7 @@ import uet.oop.bomberman.entities.tile.item.FlameItem;
 import uet.oop.bomberman.entities.tile.item.Item;
 import uet.oop.bomberman.entities.tile.item.SpeedItem;
 import uet.oop.bomberman.exceptions.LoadLevelException;
-import uet.oop.bomberman.graphics.Screen;
+import uet.oop.bomberman.graphic.Screen;
 import uet.oop.bomberman.graphic.Sprite;
 
 import java.io.File;

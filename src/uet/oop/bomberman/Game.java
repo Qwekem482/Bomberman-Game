@@ -1,8 +1,9 @@
 package uet.oop.bomberman;
 
-import uet.oop.bomberman.graphics.Screen;
+import uet.oop.bomberman.graphic.Screen;
 import uet.oop.bomberman.gui.Frame;
-import uet.oop.bomberman.input.keyBoard;
+import uet.oop.bomberman.input.Keyboard;
+
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -33,7 +34,7 @@ public class Game extends Canvas {
 
     protected int _screenDelay = SCREENDELAY;
 
-    private keyBoard input;
+    private Keyboard input;
     private boolean running = false;
     private boolean paused = true;
 
@@ -49,7 +50,7 @@ public class Game extends Canvas {
         frame.setTitle(title);
 
         screen = new Screen(WIDTH, HEIGHT);
-        input = new keyBoard();
+        input = new Keyboard();
 
         board = new Board(this, input, screen);
         addKeyListener(input);
