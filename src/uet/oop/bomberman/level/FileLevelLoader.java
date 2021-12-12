@@ -28,14 +28,14 @@ public class FileLevelLoader extends LevelLoader {
      * Ma trận chứa thông tin bản đồ, mỗi phần tử lưu giá trị kí tự đọc được
      * từ ma trận bản đồ trong tệp cấu hình
      */
-    private static char[][] map;
+    private static char[][] _map;
 
     public FileLevelLoader(Board board, int level) throws LoadLevelException {
         super(board, level);
     }
 
     public static char getMap(int x, int y) {
-        return map[x][y];
+        return _map[x][y];
     }
 
     @Override
@@ -52,10 +52,10 @@ public class FileLevelLoader extends LevelLoader {
                 row[i] = scanner.nextLine();
             }
             scanner.close();
-            map = new char[height][width];
+            _map = new char[height][width];
             for (int i = 0; i < height; i++) {
                 for (int j = 0; j < width; j++) {
-                    map[i][j] = row[i].charAt(j);
+                    _map[i][j] = row[i].charAt(j);
                 }
             }
         } catch (Exception e) {
@@ -79,6 +79,7 @@ public class FileLevelLoader extends LevelLoader {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 pos = x + y * width;
+<<<<<<< HEAD
                 switch (map[y][x]) {
                     case '#' -> _board.addEntity(pos,
                             new Wall(x, y, Sprite.wall)
@@ -96,6 +97,31 @@ public class FileLevelLoader extends LevelLoader {
                             )
                     );
                     case 'p' -> {
+=======
+                switch (_map[y][x]) {
+                    case '#':
+                        _board.addEntity(pos,
+                                new Wall(x, y, Sprite.wall)
+                        );
+                        break;
+                    case '*':
+                        _board.addEntity(pos,
+                                new LayeredEntity(x, y,
+                                        new Grass(x, y, Sprite.grass),
+                                        new Brick(x, y, Sprite.brick)
+                                )
+                        );
+                        break;
+                    case 'x':
+                        _board.addEntity(pos,
+                                new LayeredEntity(x, y,
+                                        new Portal(x, y, Sprite.portal),
+                                        new Brick(x, y, Sprite.brick)
+                                )
+                        );
+                        break;
+                    case 'p':
+>>>>>>> parent of db5d07b (finally)
                         _board.addCharacter(new Bomber(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board));
                         Screen.setOffset(0, 0);
                         _board.addEntity(pos,
