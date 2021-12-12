@@ -35,8 +35,8 @@ public class AIHard {
 	public AIHard(Enemy enemy, Board board) {
 		this.enemy = enemy;
 		this.board = board;
-		queueX = new LinkedList<Integer>();
-		queueY = new LinkedList<Integer>();
+		queueX = new LinkedList<>();
+		queueY = new LinkedList<>();
 	}
 
 	public boolean isSafe(int x, int y) {

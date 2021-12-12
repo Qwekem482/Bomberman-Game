@@ -80,96 +80,82 @@ public class FileLevelLoader extends LevelLoader {
             for (int x = 0; x < width; x++) {
                 pos = x + y * width;
                 switch (map[y][x]) {
-                    case '#':
-                        _board.addEntity(pos,
-                                new Wall(x, y, Sprite.wall)
-                        );
-                        break;
-                    case '*':
-                        _board.addEntity(pos,
-                                new LayeredEntity(x, y,
-                                        new Grass(x, y, Sprite.grass),
-                                        new Brick(x, y, Sprite.brick)
-                                )
-                        );
-                        break;
-                    case 'x':
-                        _board.addEntity(pos,
-                                new LayeredEntity(x, y,
-                                        new Portal(x, y, Sprite.portal),
-                                        new Brick(x, y, Sprite.brick)
-                                )
-                        );
-                        break;
-                    case 'p':
+                    case '#' -> _board.addEntity(pos,
+                            new Wall(x, y, Sprite.wall)
+                    );
+                    case '*' -> _board.addEntity(pos,
+                            new LayeredEntity(x, y,
+                                    new Grass(x, y, Sprite.grass),
+                                    new Brick(x, y, Sprite.brick)
+                            )
+                    );
+                    case 'x' -> _board.addEntity(pos,
+                            new LayeredEntity(x, y,
+                                    new Portal(x, y, Sprite.portal),
+                                    new Brick(x, y, Sprite.brick)
+                            )
+                    );
+                    case 'p' -> {
                         _board.addCharacter(new Bomber(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board));
                         Screen.setOffset(0, 0);
                         _board.addEntity(pos,
                                 new Grass(x, y, Sprite.grass)
                         );
-                        break;
-                    case '1':
+                    }
+                    case '1' -> {
                         _board.addCharacter(new Balloon(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board));
                         _board.addEntity(pos,
                                 new Grass(x, y, Sprite.grass)
                         );
-                        break;
-                    case '2':
+                    }
+                    case '2' -> {
                         _board.addCharacter(new Oneal(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board));
                         _board.addEntity(pos,
                                 new Grass(x, y, Sprite.grass)
                         );
-                        break;
-                    case '3':
+                    }
+                    case '3' -> {
                         _board.addCharacter(new Kondoria(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board));
                         _board.addEntity(pos,
                                 new Grass(x, y, Sprite.grass)
                         );
-                        break;
-                    case '4':
+                    }
+                    case '4' -> {
                         _board.addCharacter(new Minvo(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, 0.5, _board));
                         _board.addEntity(pos,
                                 new Grass(x, y, Sprite.grass)
                         );
-                        break;
-                    case '5':
+                    }
+                    case '5' -> {
                         _board.addCharacter(new Minvo(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, 1.0, _board));
                         _board.addEntity(pos,
                                 new Grass(x, y, Sprite.grass)
                         );
-                        break;
-                    case 'b':
-                        _board.addEntity(x + y * width,
-                                new LayeredEntity(x, y,
-                                        new Grass(x, y, Sprite.grass),
-                                        new BombItem(x, y, Sprite.powerup_bombs),
-                                        new Brick(x, y, Sprite.brick)
-                                )
-                        );
-                        break;
-                    case 'f':
-                        _board.addEntity(x + y * width,
-                                new LayeredEntity(x, y,
-                                        new Grass(x, y, Sprite.grass),
-                                        new FlameItem(x, y, Sprite.powerup_flames),
-                                        new Brick(x, y, Sprite.brick)
-                                )
-                        );
-                        break;
-                    case 's':
-                        _board.addEntity(x + y * width,
-                                new LayeredEntity(x, y,
-                                        new Grass(x, y, Sprite.grass),
-                                        new SpeedItem(x, y, Sprite.powerup_speed),
-                                        new Brick(x, y, Sprite.brick)
-                                )
-                        );
-                        break;
-                    case ' ':
-                        _board.addEntity(pos,
-                                new Grass(x, y, Sprite.grass)
-                        );
-                        break;
+                    }
+                    case 'b' -> _board.addEntity(x + y * width,
+                            new LayeredEntity(x, y,
+                                    new Grass(x, y, Sprite.grass),
+                                    new BombItem(x, y, Sprite.powerup_bombs),
+                                    new Brick(x, y, Sprite.brick)
+                            )
+                    );
+                    case 'f' -> _board.addEntity(x + y * width,
+                            new LayeredEntity(x, y,
+                                    new Grass(x, y, Sprite.grass),
+                                    new FlameItem(x, y, Sprite.powerup_flames),
+                                    new Brick(x, y, Sprite.brick)
+                            )
+                    );
+                    case 's' -> _board.addEntity(x + y * width,
+                            new LayeredEntity(x, y,
+                                    new Grass(x, y, Sprite.grass),
+                                    new SpeedItem(x, y, Sprite.powerup_speed),
+                                    new Brick(x, y, Sprite.brick)
+                            )
+                    );
+                    case ' ' -> _board.addEntity(pos,
+                            new Grass(x, y, Sprite.grass)
+                    );
                 }
             }
         }

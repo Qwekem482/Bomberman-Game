@@ -3,8 +3,6 @@ package uet.oop.bomberman.entities.bomb;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
 import uet.oop.bomberman.audio.Sound;
-import uet.oop.bomberman.entities.bomb.Flame;
-import uet.oop.bomberman.entities.bomb.FlameSegment;
 import uet.oop.bomberman.entities.AnimatedEntitiy;
 import uet.oop.bomberman.entities.character.Character;
 import uet.oop.bomberman.graphic.Screen;
@@ -59,14 +57,14 @@ public class Bomb extends AnimatedEntitiy {
     }
 
     public void renderFlames(Screen screen) {
-        for (int i = 0; i < flames.length; i++) {
-            flames[i].render(screen);
+        for (Flame flame : flames) {
+            flame.render(screen);
         }
     }
 
     public void updateFlames() {
-        for (int i = 0; i < flames.length; i++) {
-            flames[i].update();
+        for (Flame flame : flames) {
+            flame.update();
         }
     }
 
@@ -91,12 +89,12 @@ public class Bomb extends AnimatedEntitiy {
     public FlameSegment flameAt(int x, int y) {
         if(!exploded) return null;
 
-        for (int i = 0; i < flames.length; i++) {
-            if(flames[i] == null) {
+        for (Flame flame : flames) {
+            if (flame == null) {
                 return null;
             }
-            FlameSegment e = flames[i].flameSegmentAt(x, y);
-            if(e != null) {
+            FlameSegment e = flame.flameSegmentAt(x, y);
+            if (e != null) {
                 return e;
             }
         }

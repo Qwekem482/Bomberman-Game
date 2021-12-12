@@ -36,11 +36,11 @@ public class BackgroundMusic {
 
     public static void stopMusic()
     {
-        if (playing)
-        {
-            playing = false;
-            clip.stop();
+        if (!playing) {
+            return;
         }
+        playing = false;
+        clip.stop();
     }
 
 }

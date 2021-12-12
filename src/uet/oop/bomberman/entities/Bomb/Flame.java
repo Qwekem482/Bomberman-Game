@@ -10,7 +10,6 @@ import uet.oop.bomberman.entities.tile.destroyable.Brick;
 import uet.oop.bomberman.entities.tile.item.Item;
 import uet.oop.bomberman.level.Coordinates;
 import uet.oop.bomberman.graphic.Screen;
-import uet.oop.bomberman.entities.bomb.FlameSegment;
 
 public class Flame extends Entity {
     protected Board _board;
@@ -18,8 +17,8 @@ public class Flame extends Entity {
     protected int xOrigin, yOrigin;
     protected FlameSegment[] _flameSegments = new FlameSegment[0];
 
-    private int[] gapX = {0, 1, 0, -1};
-    private int[] gapY = {-1, 0, 1, 0};
+    private final int[] gapX = {0, 1, 0, -1};
+    private final int[] gapY = {-1, 0, 1, 0};
 
     /**
      *
@@ -49,8 +48,7 @@ public class Flame extends Entity {
         _flameSegments = new FlameSegment[radius];
         for (int i = 1; i <= radius; i++) {
             Entity entity = _board.getEntityAt(Coordinates.tileToPixel(this.x + i*gapX[_direction]), Coordinates.tileToPixel(this.y + i*gapY[_direction]));
-            if (entity instanceof LayeredEntity) {
-                LayeredEntity layeredEntity = (LayeredEntity) entity;
+            if (entity instanceof LayeredEntity layeredEntity) {
                 entity = layeredEntity.getTopEntity();
                 if (entity instanceof Item)
                 {
@@ -82,9 +80,9 @@ public class Flame extends Entity {
     }
 
     public FlameSegment flameSegmentAt(int x, int y) {
-        for (int i = 0; i < _flameSegments.length; i++) {
-            if(_flameSegments[i].getX() == x && _flameSegments[i].getY() == y)
-                return _flameSegments[i];
+        for (FlameSegment flameSegment : _flameSegments) {
+            if (flameSegment.getX() == x && flameSegment.getY() == y)
+                return flameSegment;
         }
         return null;
     }
@@ -94,8 +92,8 @@ public class Flame extends Entity {
 
     @Override
     public void render(Screen screen) {
-        for (int i = 0; i < _flameSegments.length; i++) {
-            _flameSegments[i].render(screen);
+        for (FlameSegment flameSegment : _flameSegments) {
+            flameSegment.render(screen);
         }
     }
 }

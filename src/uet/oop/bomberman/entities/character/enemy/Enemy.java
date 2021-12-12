@@ -60,12 +60,10 @@ public abstract class Enemy extends Character {
 			afterKill();
 			return;
 		}
-		if(live) {
-			calculateMove();
-			checkCollide();
-			checkOutOfBomb();
-			board.getBomber().checkCollide();
-		}
+		calculateMove();
+		checkCollide();
+		checkOutOfBomb();
+		board.getBomber().checkCollide();
 	}
 
 	public void addBomb(Bomb bomb)

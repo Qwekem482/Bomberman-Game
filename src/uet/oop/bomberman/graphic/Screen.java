@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class Screen {
     protected int width, height;
     public int[] pixels;
-    private int transparentColor = 0xffff00ff;
+    private final int transparentColor = 0xffff00ff;
 
     public static int xOffset = 0, yOffset = 0;
 

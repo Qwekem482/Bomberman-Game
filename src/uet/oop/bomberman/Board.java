@@ -159,18 +159,10 @@ public class Board {
 
     public void drawScreen(Graphics g) {
         switch (screenToShow) {
-            case 1:
-                screen.drawEndGame(g, points);
-                break;
-            case 2:
-                screen.drawChangeLevel(g, levelLoader.getLevel());
-                break;
-            case 3:
-                screen.drawPaused(g);
-                break;
-            case 4:
-                screen.drawVictory(g, points);
-                break;
+            case 1 -> screen.drawEndGame(g, points);
+            case 2 -> screen.drawChangeLevel(g, levelLoader.getLevel());
+            case 3 -> screen.drawPaused(g);
+            case 4 -> screen.drawVictory(g, points);
         }
     }
 
@@ -279,34 +271,30 @@ public class Board {
     }
 
     protected void renderCharacter(Screen screen) {
-        Iterator<Character> itr = characters.iterator();
 
-        while(itr.hasNext())
-            itr.next().render(screen);
+        for (Character character : characters) character.render(screen);
     }
 
     protected void renderBombs(Screen screen) {
-        Iterator<Bomb> itr = bombs.iterator();
 
-        while(itr.hasNext())
-            itr.next().render(screen);
+        for (Bomb bomb : bombs) bomb.render(screen);
     }
 
     public void renderMessages(Graphics g) {
         Message m;
-        for (int i = 0; i < messages.size(); i++) {
-            m = messages.get(i);
+        for (Message message : messages) {
+            m = message;
 
             g.setFont(new Font("Arial", Font.PLAIN, m.getSize()));
             g.setColor(m.getColor());
-            g.drawString(m.getMessage(), (int)m.getX() - Screen.xOffset  * Game.SCALE, (int)m.getY());
+            g.drawString(m.getMessage(), (int) m.getX() - Screen.xOffset * Game.SCALE, (int) m.getY());
         }
     }
 
     protected void updateEntities() {
         if( game.isPaused() ) return;
-        for (int i = 0; i < entities.length; i++) {
-            entities[i].update();
+        for (Entity entity : entities) {
+            entity.update();
         }
     }
 
@@ -320,10 +308,8 @@ public class Board {
 
     protected void updateBombs() {
         if( game.isPaused() ) return;
-        Iterator<Bomb> itr = bombs.iterator();
 
-        while(itr.hasNext())
-            itr.next().update();
+        for (Bomb bomb : bombs) bomb.update();
     }
 
     protected void updateMessages() {

@@ -29,8 +29,8 @@ public class AIMedium {
 	{
 		this.enemy = enemy;
 		this.board = board;
-		queueX = new LinkedList<Integer>();
-		queueY = new LinkedList<Integer>();
+		queueX = new LinkedList<>();
+		queueY = new LinkedList<>();
 	}
 
 	public int calculateDirection() {
