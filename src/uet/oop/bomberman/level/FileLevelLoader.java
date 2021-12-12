@@ -28,14 +28,14 @@ public class FileLevelLoader extends LevelLoader {
      * Ma trận chứa thông tin bản đồ, mỗi phần tử lưu giá trị kí tự đọc được
      * từ ma trận bản đồ trong tệp cấu hình
      */
-    private static char[][] _map;
+    private static char[][] map;
 
     public FileLevelLoader(Board board, int level) throws LoadLevelException {
         super(board, level);
     }
 
     public static char getMap(int x, int y) {
-        return _map[x][y];
+        return map[x][y];
     }
 
     @Override
@@ -52,10 +52,10 @@ public class FileLevelLoader extends LevelLoader {
                 row[i] = scanner.nextLine();
             }
             scanner.close();
-            _map = new char[height][width];
+            map = new char[height][width];
             for (int i = 0; i < height; i++) {
                 for (int j = 0; j < width; j++) {
-                    _map[i][j] = row[i].charAt(j);
+                    map[i][j] = row[i].charAt(j);
                 }
             }
         } catch (Exception e) {
@@ -79,7 +79,7 @@ public class FileLevelLoader extends LevelLoader {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 pos = x + y * width;
-                switch (_map[y][x]) {
+                switch (map[y][x]) {
                     case '#':
                         _board.addEntity(pos,
                                 new Wall(x, y, Sprite.wall)
